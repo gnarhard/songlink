@@ -49,10 +49,10 @@ class SongLinkService
             $songLink = SongLink::updateOrCreate(
                 ['slug' => $slug],
                 [
-                    'title'            => $title,
-                    'slug'             => $slug,
-                    'links'            => $links,
-                    'raw_response'     => json_encode($data),
+                    'title' => $title,
+                    'slug' => $slug,
+                    'links' => $links,
+                    'raw_response' => json_encode($data),
                 ]
             );
 
