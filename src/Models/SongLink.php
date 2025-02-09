@@ -41,6 +41,7 @@ class SongLink extends Model
         }
 
         unset($platformUrls['amazonStore']);
+        unset($platformUrls['youtube']);
 
         // Correct the spelling of platform names
         foreach (array_keys($platformUrls) as $platform) {
