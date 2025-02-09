@@ -52,7 +52,7 @@ class SongLinkService
                     'title'            => $title,
                     'slug'             => $slug,
                     'links'            => $links,
-                    'raw_response'     => $data,
+                    'raw_response'     => json_encode($data),
                 ]
             );
 
