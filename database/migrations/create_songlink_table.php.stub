@@ -12,6 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->string('slug')->unique();
+            $table->string('youtube_video_id')->nullable();
+            $table->string('album_artwork_path')->nullable();
             $table->json('links');
             $table->longText('raw_response')->nullable();
             $table->timestamps();
