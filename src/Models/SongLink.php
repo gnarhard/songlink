@@ -12,6 +12,8 @@ class SongLink extends Model
         'links' => 'array',
     ];
 
+    protected $hidden = ['raw_response'];
+
     public function getLink(string $platform): ?string
     {
         return $this->links[$platform]['url'] ?? null;
