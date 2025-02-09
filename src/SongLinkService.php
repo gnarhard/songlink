@@ -2,8 +2,8 @@
 
 namespace Gnarhard\SongLink;
 
-use Illuminate\Support\Facades\Http;
 use Gnarhard\SongLink\Models\SongLink;
+use Illuminate\Support\Facades\Http;
 
 class SongLinkService
 {
@@ -51,10 +51,10 @@ class SongLinkService
                 ['spotify_url' => $spotifyUrl],
                 [
                     'entity_unique_id' => $entityUniqueId,
-                    'title'            => $title,
-                    'slug'             => $slug,
-                    'links'            => $links,
-                    'raw_response'     => $data,
+                    'title' => $title,
+                    'slug' => $slug,
+                    'links' => $links,
+                    'raw_response' => $data,
                 ]
             );
 

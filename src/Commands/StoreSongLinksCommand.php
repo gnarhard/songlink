@@ -36,10 +36,10 @@ class StoreSongLinksCommand extends Command
         $songLink = SongLink::storeSongLinks($spotifyUrl, $title, $slug);
 
         if ($songLink) {
-            $this->info("Song links stored successfully!");
+            $this->info('Song links stored successfully!');
             $this->line(print_r($songLink->toArray(), true));
         } else {
-            $this->error("Failed to fetch or store song links.");
+            $this->error('Failed to fetch or store song links.');
         }
     }
 }

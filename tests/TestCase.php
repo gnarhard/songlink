@@ -2,9 +2,9 @@
 
 namespace Gnarhard\SongLink\Tests;
 
+use Gnarhard\SongLink\SongLinkServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Gnarhard\SongLink\SongLinkServiceProvider;
 
 class TestCase extends Orchestra
 {
