@@ -48,13 +48,13 @@ class SongLinkService
 
             // Create or update a SongLink record.
             $songLink = SongLink::updateOrCreate(
-                ['spotify_url' => $spotifyUrl],
+                ['slug' => $slug],
                 [
                     'entity_unique_id' => $entityUniqueId,
-                    'title' => $title,
-                    'slug' => $slug,
-                    'links' => $links,
-                    'raw_response' => $data,
+                    'title'            => $title,
+                    'slug'             => $slug,
+                    'links'            => $links,
+                    'raw_response'     => $data,
                 ]
             );
 
