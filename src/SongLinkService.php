@@ -44,13 +44,11 @@ class SongLinkService
             // Extract the links data from the API response.
             // (The structure may change; adjust accordingly.)
             $links = $data['linksByPlatform'] ?? [];
-            $entityUniqueId = $data['entityUniqueId'] ?? null;
 
             // Create or update a SongLink record.
             $songLink = SongLink::updateOrCreate(
                 ['slug' => $slug],
                 [
-                    'entity_unique_id' => $entityUniqueId,
                     'title'            => $title,
                     'slug'             => $slug,
                     'links'            => $links,
