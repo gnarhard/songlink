@@ -51,10 +51,10 @@ class SongLinkService
                 ['slug' => $slug],
                 [
                     'entity_unique_id' => $entityUniqueId,
-                    'title'            => $title,
-                    'slug'             => $slug,
-                    'links'            => $links,
-                    'raw_response'     => $data,
+                    'title' => $title,
+                    'slug' => $slug,
+                    'links' => $links,
+                    'raw_response' => $data,
                 ]
             );
 
