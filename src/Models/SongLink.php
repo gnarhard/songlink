@@ -55,17 +55,40 @@ class SongLink extends Model
     private function fixPlatformPunctuation(string $platform): string
     {
         $platformMap = [
-            'itunes' => 'iTunes',
-            'spotify' => 'Spotify',
-            'youtube' => 'YouTube',
-            'tidal' => 'Tidal',
-            'deezer' => 'Deezer',
-            'amazonMusic' => 'Amazon',
+            'itunes'       => 'iTunes',
+            'spotify'      => 'Spotify',
+            'youtube'      => 'YouTube',
+            'tidal'        => 'Tidal',
+            'deezer'       => 'Deezer',
+            'amazonMusic'  => 'Amazon',
             'youtubeMusic' => 'YouTube Music',
-            'appleMusic' => 'Apple Music',
-            'anghami' => 'Anghami',
+            'appleMusic'   => 'Apple Music',
+            'anghami'      => 'Anghami',
+            'bandcamp'     => 'Bandcamp',
+            'soundcloud'   => 'SoundCloud',
+            'pandora'      => 'Pandora',
         ];
 
         return $platformMap[$platform] ?? $platform;
+    }
+
+    public static function getPlatformIcon(string $platform): string
+    {
+        $iconMap = [
+            'iTunes'        => 'fab fa-itunes-note',
+            'Spotify'       => 'fab fa-spotify',
+            'YouTube'       => 'fab fa-youtube',
+            'Tidal'         => 'fab fa-tidal',
+            'Deezer'        => 'fab fa-deezer',
+            'Amazon'        => 'fab fa-amazon',
+            'YouTube Music' => 'fab fa-youtube',
+            'Apple Music'   => 'fab fa-apple',
+            'Anghami'       => 'fab fa-anghami',
+            'Bandcamp'      => 'fab fa-bandcamp',
+            'SoundCloud'    => 'fab fa-soundcloud',
+            'Pandora'       => 'fab fa-pandora',
+        ];
+
+        return $iconMap[$platform] ?? 'fas fa-link';
     }
 }
