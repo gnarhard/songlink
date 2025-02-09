@@ -40,6 +40,31 @@ class SongLink extends Model
             }
         }
 
+        unset($platformUrls['amazonStore']);
+
+        // Correct the spelling of platform names
+        foreach (array_keys($platformUrls) as $platform) {
+            unset($platformUrls[$platform]);
+            $platformUrls[$this->fixPlatformPunctuation($platform)] = $details['url'];
+        }
+
         return $platformUrls;
+    }
+
+    private function fixPlatformPunctuation(string $platform): string
+    {
+        $platformMap = [
+            'itunes' => 'iTunes',
+            'spotify' => 'Spotify',
+            'youtube' => 'YouTube',
+            'tidal' => 'Tidal',
+            'deezer' => 'Deezer',
+            'amazonMusic' => 'Amazon',
+            'youtubeMusic' => 'YouTube Music',
+            'appleMusic' => 'Apple Music',
+            'anghami' => 'Anghami',
+        ];
+
+        return $platformMap[$platform] ?? $platform;
     }
 }
