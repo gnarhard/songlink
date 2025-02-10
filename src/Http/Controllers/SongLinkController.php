@@ -22,6 +22,6 @@ class SongLinkController extends Controller
             $song = SongLink::latest()->first();
         }
 
-        return view("listen", ['song' => $song]);
+        return view("songlink.listen", ['song' => $song]);
     }
 }
