@@ -45,6 +45,7 @@ class SongLink extends Model
 
         // Correct the spelling of platform names
         foreach (array_keys($platformUrls) as $platform) {
+            $details = $platformUrls[$platform];
             unset($platformUrls[$platform]);
             $platformUrls[$this->fixPlatformPunctuation($platform)] = $details['url'];
         }
