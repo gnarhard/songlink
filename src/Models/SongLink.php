@@ -68,6 +68,7 @@ class SongLink extends Model
             'bandcamp' => 'Bandcamp',
             'soundcloud' => 'SoundCloud',
             'pandora' => 'Pandora',
+            'boomplay' => 'Boomplay',
         ];
 
         return $platformMap[$platform] ?? $platform;
@@ -79,15 +80,12 @@ class SongLink extends Model
             'iTunes' => 'fab fa-itunes-note',
             'Spotify' => 'fab fa-spotify',
             'YouTube' => 'fab fa-youtube',
-            'Tidal' => 'fab fa-tidal',
             'Deezer' => 'fab fa-deezer',
             'Amazon' => 'fab fa-amazon',
             'YouTube Music' => 'fab fa-youtube',
             'Apple Music' => 'fab fa-apple',
-            'Anghami' => 'fab fa-anghami',
             'Bandcamp' => 'fab fa-bandcamp',
             'SoundCloud' => 'fab fa-soundcloud',
-            'Pandora' => 'fab fa-pandora',
         ];
 
         return $iconMap[$platform] ?? 'fas fa-link';
