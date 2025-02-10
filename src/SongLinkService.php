@@ -28,8 +28,6 @@ class SongLinkService
 
     /**
      * Get the display/popularity order for platforms.
-     *
-     * @return array
      */
     public function getPopularityOrder(): array
     {
@@ -49,14 +47,12 @@ class SongLinkService
     /**
      * Fetch song links from the Odesli API using a Spotify URL.
      *
-     * @param  string  $spotifyUrl
-     * @param  bool    $isSingle   Whether this track is a single (affects the Odesli query param)
-     * @return array|null
+     * @param  bool  $isSingle  Whether this track is a single (affects the Odesli query param)
      */
     public function fetchSongLinks(string $spotifyUrl, bool $isSingle = false): ?array
     {
         $response = Http::get($this->apiUrl, [
-            'url'          => $spotifyUrl,
+            'url' => $spotifyUrl,
             'songIfSingle' => $isSingle,
         ]);
 
@@ -69,12 +65,6 @@ class SongLinkService
 
     /**
      * Fetch and store song links in the database.
-     *
-     * @param  string  $spotifyUrl
-     * @param  string  $title
-     * @param  string  $slug
-     * @param  bool    $isSingle
-     * @return SongLink|null
      */
     public function storeSongLinks(string $spotifyUrl, string $title, string $slug, bool $isSingle = false): ?SongLink
     {
@@ -91,9 +81,9 @@ class SongLinkService
         return SongLink::updateOrCreate(
             ['slug' => $slug],
             [
-                'title'        => $title,
-                'slug'         => $slug,
-                'links'        => $links,
+                'title' => $title,
+                'slug' => $slug,
+                'links' => $links,
                 'raw_response' => json_encode($data),
             ]
         );
@@ -102,9 +92,7 @@ class SongLinkService
     /**
      * Get the URL for a specific platform from an array of links.
      *
-     * @param  array   $links    e.g. $songLink->links
-     * @param  string  $platform
-     * @return string|null
+     * @param  array  $links  e.g. $songLink->links
      */
     public function getLink(array $links, string $platform): ?string
     {
@@ -115,7 +103,6 @@ class SongLinkService
      * Create a sorted, human-friendly list of platform names => URLs.
      *
      * @param  array  $links  Raw 'linksByPlatform' array
-     * @return array
      */
     public function getPlatformUrls(array $links): array
     {
@@ -144,20 +131,20 @@ class SongLinkService
     protected function fixPlatformPunctuation(string $platform): string
     {
         $map = [
-            'itunes'       => 'iTunes',
-            'spotify'      => 'Spotify',
-            'youtube'      => 'YouTube',
-            'tidal'        => 'Tidal',
-            'deezer'       => 'Deezer',
-            'amazonMusic'  => 'Amazon',
+            'itunes' => 'iTunes',
+            'spotify' => 'Spotify',
+            'youtube' => 'YouTube',
+            'tidal' => 'Tidal',
+            'deezer' => 'Deezer',
+            'amazonMusic' => 'Amazon',
             'youtubeMusic' => 'YouTube Music',
-            'appleMusic'   => 'Apple Music',
-            'anghami'      => 'Anghami',
-            'bandcamp'     => 'Bandcamp',
-            'soundcloud'   => 'SoundCloud',
-            'pandora'      => 'Pandora',
-            'boomplay'     => 'Boomplay',
-            'napster'      => 'Napster',
+            'appleMusic' => 'Apple Music',
+            'anghami' => 'Anghami',
+            'bandcamp' => 'Bandcamp',
+            'soundcloud' => 'SoundCloud',
+            'pandora' => 'Pandora',
+            'boomplay' => 'Boomplay',
+            'napster' => 'Napster',
         ];
 
         return $map[$platform] ?? $platform;
@@ -165,9 +152,6 @@ class SongLinkService
 
     /**
      * Sort the given [PlatformName => URL] array by $popularityOrder.
-     *
-     * @param  array  $platformUrls
-     * @return array
      */
     protected function sortPlatformUrls(array $platformUrls): array
     {
@@ -193,20 +177,19 @@ class SongLinkService
      * Get a Font Awesome icon class for a given platform name.
      *
      * @param  string  $platform  e.g. 'Spotify', 'Apple Music', ...
-     * @return string
      */
     public static function getPlatformIcon(string $platform): string
     {
         $iconMap = [
-            'iTunes'        => 'fab fa-itunes-note',
-            'Spotify'       => 'fab fa-spotify',
-            'YouTube'       => 'fab fa-youtube',
-            'Deezer'        => 'fab fa-deezer',
-            'Amazon'        => 'fab fa-amazon',
+            'iTunes' => 'fab fa-itunes-note',
+            'Spotify' => 'fab fa-spotify',
+            'YouTube' => 'fab fa-youtube',
+            'Deezer' => 'fab fa-deezer',
+            'Amazon' => 'fab fa-amazon',
             'YouTube Music' => 'fab fa-youtube',
-            'Apple Music'   => 'fab fa-apple',
-            'Bandcamp'      => 'fab fa-bandcamp',
-            'SoundCloud'    => 'fab fa-soundcloud',
+            'Apple Music' => 'fab fa-apple',
+            'Bandcamp' => 'fab fa-bandcamp',
+            'SoundCloud' => 'fab fa-soundcloud',
         ];
 
         return $iconMap[$platform] ?? 'fas fa-link';

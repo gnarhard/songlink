@@ -2,10 +2,10 @@
 
 namespace Gnarhard\SongLink\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Gnarhard\SongLink\Models\SongLink;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 
 class SongLinkController extends Controller
 {
@@ -22,6 +22,6 @@ class SongLinkController extends Controller
             $song = SongLink::latest()->first();
         }
 
-        return view("listen", ['song' => $song]);
+        return view('listen', ['song' => $song]);
     }
 }
