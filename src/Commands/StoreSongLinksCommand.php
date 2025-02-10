@@ -33,7 +33,7 @@ class StoreSongLinksCommand extends Command
 
         $this->info("Fetching song links for: {$title}");
 
-        $songLink = SongLink::storeSongLinks($spotifyUrl, $title, $slug);
+        $songLink = SongLink::storeSongLinks($spotifyUrl, $title, $slug, $isSingle);
 
         if ($songLink) {
             $this->info('Song links stored successfully!');
