@@ -20,10 +20,11 @@ class SongLinkService
     /**
      * Fetch song links from the Odesli API using a Spotify URL.
      */
-    public function fetchSongLinks(string $spotifyUrl): ?array
+    public function fetchSongLinks(string $spotifyUrl, bool $isSingle): ?array
     {
         $response = Http::get($this->apiUrl, [
             'url' => $spotifyUrl,
+            'songIfSingle' => $isSingle,
         ]);
 
         if ($response->successful()) {
@@ -36,9 +37,9 @@ class SongLinkService
     /**
      * Fetch and store song links in the database.
      */
-    public function storeSongLinks(string $spotifyUrl, string $title, string $slug): ?SongLink
+    public function storeSongLinks(string $spotifyUrl, string $title, string $slug, bool $isSingle): ?SongLink
     {
-        $data = $this->fetchSongLinks($spotifyUrl);
+        $data = $this->fetchSongLinks($spotifyUrl, $isSingle);
 
         if ($data) {
             // Extract the links data from the API response.
@@ -49,9 +50,9 @@ class SongLinkService
             $songLink = SongLink::updateOrCreate(
                 ['slug' => $slug],
                 [
-                    'title' => $title,
-                    'slug' => $slug,
-                    'links' => $links,
+                    'title'        => $title,
+                    'slug'         => $slug,
+                    'links'        => $links,
                     'raw_response' => json_encode($data),
                 ]
             );
