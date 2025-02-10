@@ -105,7 +105,6 @@ it('can create platform links', function () {
     }
     expect($hasUrlValue)->toBeTrue();
 
-
     // Check if the array is sorted by popularity
     $popularity = SongLinkFacade::getPopularityOrder();
     $sortedKeys = array_keys($platformUrls);
