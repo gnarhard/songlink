@@ -1,5 +1,5 @@
-<div style="background: url({{ asset($song->album_artwork_path) }}); background-size: cover;" class="container-fluid">
-    <div class="row" style="background-color: rgba(0,0,0,.8);">
+<div style="background: url({{ asset($song->album_artwork_path) }}); background-size: cover; background-position: center;" class="container-fluid">
+    <div class="row" style="background-color: rgba(0,0,0,.7);">
         <div class="col col-md-8 mx-auto py-4" style="max-width: 600px;">
             <h6 class="text-center mb-1 d-block">LISTEN TO</h6>
             <h2 class="text-center text-uppercase mb-0">{{ $song->title }}</h2>
