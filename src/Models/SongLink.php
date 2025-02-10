@@ -47,7 +47,7 @@ class SongLink extends Model
         foreach (array_keys($platformUrls) as $platform) {
             $details = $platformUrls[$platform];
             unset($platformUrls[$platform]);
-            $platformUrls[$this->fixPlatformPunctuation($platform)] = $details['url'];
+            $platformUrls[$this->fixPlatformPunctuation($platform)] = $details;
         }
 
         return $platformUrls;
