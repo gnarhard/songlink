@@ -10,7 +10,12 @@
             <h4 class="text-center mt-4">Stream on your favorite platform</h4>
             <ul class="list-unstyled mx-auto mt-4 text-center">
                 @foreach ($song->platform_urls as $platform => $url)
-                    <li class="mb-1">@include('components.icon_text_button', ['icon_classes' => 'fa-1x ' . Gnarhard\SongLink\Facades\SongLink::getPlatformIcon($platform), 'link' => $url, 'text' => $platform, 'aria_label' => $platform])</li>
+                    <li class="mb-1">
+                        <a href="{{ $url }}" id="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformClickId($platform) }}" data-conversion-value="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformConversionValue($platform) }}" class="btn-primary btn position-relative listen_link" target="_blank" aria-label="{{ $platform }}" style="min-width: 180px;">
+                            <i class="fa-1x position-absolute {{ Gnarhard\SongLink\Facades\SongLink::getPlatformIcon($platform) }}" style="left: 12px; top: 12px;"></i>
+                            <span class="ms-1 btn-icon-primary__link">{{ $platform }}</span>
+                        </a>
+                    </li>
                 @endforeach
                 @if (route('mailing-list'))
                     <li class="mt-3 mb-1">
@@ -21,7 +26,7 @@
                     </li>
                 @endif
                 <li class="">
-                    <button onclick="window.copyLinkToClipboard()" class="btn-primary btn position-relative" target="_blank" aria-label="Share" style="min-width: 200px;">
+                    <button id="share_listen_page" onclick="window.copyLinkToClipboard()" class="btn-primary btn position-relative" target="_blank" aria-label="Share" style="min-width: 200px;">
                         <i class="fa fa-1x fa-share position-absolute" style="left: 12px; top: 12px;"></i>
                         <span class="ms-1 btn-icon-primary__link">Share</span>
                     </button>
