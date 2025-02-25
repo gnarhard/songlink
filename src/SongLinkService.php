@@ -198,19 +198,19 @@ class SongLinkService
     public static function getPlatformConversionValue(string $platform): float
     {
         $map = [
-            'Spotify'       => .003,
-            'Apple Music'   => .006,
+            'Spotify' => .003,
+            'Apple Music' => .006,
             'YouTube Music' => .0003,
-            'Amazon'        => .004,
-            'Deezer'        => .0064,
-            'Pandora'       => .0013,
-            'Tidal'         => .0125,
-            'iTunes'        => .99,
-            'Bandcamp'      => .99,
-            'Boomplay'      => .003,
-            'Anghami'       => .0035,
-            'Napster'       => .019,
-            'SoundCloud'    => .003275,
+            'Amazon' => .004,
+            'Deezer' => .0064,
+            'Pandora' => .0013,
+            'Tidal' => .0125,
+            'iTunes' => .99,
+            'Bandcamp' => .99,
+            'Boomplay' => .003,
+            'Anghami' => .0035,
+            'Napster' => .019,
+            'SoundCloud' => .003275,
         ];
 
         return $map[$platform] ?? .0035;
@@ -219,20 +219,20 @@ class SongLinkService
     public static function getPlatformClickId(string $platform): string
     {
         $map = [
-            'Spotify'       => 'spotify_stream',
-            'Apple Music'   => 'apple_music_stream',
+            'Spotify' => 'spotify_stream',
+            'Apple Music' => 'apple_music_stream',
             'YouTube Music' => 'youtube_music_stream',
-            'Amazon'        => 'amazon_stream',
-            'Deezer'        => 'deezer_stream',
-            'Pandora'       => 'pandora_stream',
-            'Tidal'         => 'tidal_stream',
-            'iTunes'        => 'itunes_download',
-            'Bandcamp'      => 'bandcamp_download',
-            'Boomplay'      => 'boomplay_stream',
-            'Anghami'       => 'anghami_stream',
-            'Napster'       => 'napster_stream',
-            'SoundCloud'    => 'soundcloud_stream',
-            'Share'         => 'share_listen_page',
+            'Amazon' => 'amazon_stream',
+            'Deezer' => 'deezer_stream',
+            'Pandora' => 'pandora_stream',
+            'Tidal' => 'tidal_stream',
+            'iTunes' => 'itunes_download',
+            'Bandcamp' => 'bandcamp_download',
+            'Boomplay' => 'boomplay_stream',
+            'Anghami' => 'anghami_stream',
+            'Napster' => 'napster_stream',
+            'SoundCloud' => 'soundcloud_stream',
+            'Share' => 'share_listen_page',
         ];
 
         return $map[$platform] ?? .0035;
