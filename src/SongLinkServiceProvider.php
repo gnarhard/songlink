@@ -5,7 +5,6 @@ namespace Gnarhard\SongLink;
 use Gnarhard\SongLink\Commands\StoreSongLinksCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Illuminate\Support\Facades\Blade;
 
 class SongLinkServiceProvider extends PackageServiceProvider
 {
