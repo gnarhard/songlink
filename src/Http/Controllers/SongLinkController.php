@@ -2,18 +2,15 @@
 
 namespace Gnarhard\SongLink\Http\Controllers;
 
+use Gnarhard\SongLink\Facades\SongLink as FacadesSongLink;
+use Gnarhard\SongLink\Models\SongLink;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Gnarhard\SongLink\Models\SongLink;
-use Gnarhard\SongLink\Facades\SongLink as FacadesSongLink;
 
 class SongLinkController
 {
     /**
      * Show the listen page.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
     public function showListenPage(Request $request): View
     {
@@ -28,13 +25,14 @@ class SongLinkController
                 return null;
             }
             $song->platform_urls = FacadesSongLink::getPlatformUrls($song->links);
+
             return $song;
         });
 
         if ($song == null) {
-            return view("errors.404");
+            return view('errors.404');
         }
 
-        return view("pages.listen", ['song' => $song]);
+        return view('pages.listen', ['song' => $song]);
     }
 }
