@@ -27,7 +27,7 @@ class StoreSongLinksCommand extends Command
     public function handle()
     {
         $spotifyUrl = $this->argument('spotifyUrl');
-        $isSingle = $this->argument('isSingle') ?? false;
+        $isSingle = $this->option('isSingle');
         $title = $this->argument('title');
         $slug = $this->argument('slug');
         $albumArtworkPath = $this->argument('albumArtworkPath');
