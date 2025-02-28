@@ -1,3 +1,11 @@
+<style>
+    #uncommonPlatforms {
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+        max-height: 0;
+    }
+</style>
+
 <div style="background: url({{ asset($song->album_artwork_path) }}); background-size: cover; background-position: center;" class="container-fluid">
     <div class="row" style="background-color: rgba(0,0,0,.7);">
         <div class="col col-md-8 mx-auto py-4" style="max-width: 600px;">
@@ -13,14 +21,18 @@
                         </a>
                     </li>
                 @endforeach
-                @foreach ($song->uncommon_platform_urls as $platform => $url)
-                    <li class="mb-1 d-none">
-                        <a href="{{ $url }}" id="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformClickId($platform) }}" data-conversion-value="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformConversionValue($platform) }}" class="btn-primary btn position-relative listen_link" target="_blank" aria-label="{{ $platform }}" style="min-width: 180px;">
-                            <i class="fa-1x position-absolute {{ Gnarhard\SongLink\Facades\SongLink::getPlatformIcon($platform) }}" style="left: 12px; top: 12px;"></i>
-                            <span class="ms-1 btn-icon-primary__link">{{ $platform }}</span>
-                        </a>
-                    </li>
-                @endforeach
+                <div id="uncommonPlatforms">
+                    @foreach ($song->uncommon_platform_urls as $platform => $url)
+                        <li class="mb-1">
+                            <a href="{{ $url }}" id="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformClickId($platform) }}" data-conversion-value="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformConversionValue($platform) }}" class="btn-primary btn position-relative listen_link" target="_blank" aria-label="{{ $platform }}" style="min-width: 180px;">
+                                <i class="fa-1x position-absolute {{ Gnarhard\SongLink\Facades\SongLink::getPlatformIcon($platform) }}" style="left: 12px; top: 12px;"></i>
+                                <span class="ms-1 btn-icon-primary__link">{{ $platform }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </div>
+                <a href="#" id="more" class="text-decoration-none">more...</a>
+
                 @if (route('mailing-list'))
                     <li class="mt-3 mb-1">
                         <a href="{{ route('mailing-list') }}" class="btn-primary btn position-relative" aria-label="Share" style="min-width: 200px;">
@@ -37,7 +49,7 @@
                 </li>
             </ul>
 
-            <h4 class="text-center mt-5">LATEST VIDEO</h4>
+            <h4 class="text-center mt-4">LATEST VIDEO</h4>
             @empty(!$song->youtube_video_id)
                 @include('components.embedded_video', ['videoId' => $song->youtube_video_id])
             @endempty
@@ -60,5 +72,22 @@
                 document.querySelector('.link_copied').classList.add('d-none');
             }, 3000);
         }
+
+        // Get references to the elements
+        var moreLink = document.getElementById("more");
+        var uncommonPlatforms = document.getElementById("uncommonPlatforms");
+
+        // Add click event listener to the read more link
+        moreLink.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            if (uncommonPlatforms.style.maxHeight) {
+                uncommonPlatforms.style.maxHeight = null;
+                moreLink.textContent = "more...";
+            } else {
+                uncommonPlatforms.style.maxHeight = uncommonPlatforms.scrollHeight + "px";
+                moreLink.textContent = "less...";
+            }
+        });
     </script>
 @endpush
