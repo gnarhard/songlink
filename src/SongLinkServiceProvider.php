@@ -19,6 +19,7 @@ class SongLinkServiceProvider extends PackageServiceProvider
             ->name('songlink')
             ->hasConfigFile()
             ->hasRoute('web')
+            ->hasViews()
             ->hasMigration('create_songlink_table')
             ->hasCommand(StoreSongLinksCommand::class);
     }
