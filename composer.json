@@ -1,7 +1,7 @@
 {
     "name": "gnarhard/songlink",
     "description": "Generate and save all public streaming links relating to a specific song or album.",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "keywords": [
         "Gnarhard",
         "laravel",
