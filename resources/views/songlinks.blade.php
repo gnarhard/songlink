@@ -4,10 +4,6 @@
             <h6 class="text-center mb-1 d-block">LISTEN TO</h6>
             <h2 class="text-center text-uppercase mb-0">{{ $song->title }}</h2>
             <h4 class="text-center mb-4">{{ $artist ?? '' }}</h4>
-            @empty(!$song->youtube_video_id)
-                @include('components.embedded_video', ['videoId' => $song->youtube_video_id])
-            @endempty
-            <h4 class="text-center mt-4">Stream on your favorite platform</h4>
             <ul class="list-unstyled mx-auto mt-4 text-center">
                 @foreach ($song->platform_urls as $platform => $url)
                     <li class="mb-1">
@@ -32,6 +28,11 @@
                     </button>
                 </li>
             </ul>
+
+            <h3>LATEST VIDEO</h3>
+            @empty(!$song->youtube_video_id)
+                @include('components.embedded_video', ['videoId' => $song->youtube_video_id])
+            @endempty
             <div class="link_copied bg-success text-center p-3 rounded d-none">LINK COPIED TO CLIPBOARD</div>
         </div>
     </div>

@@ -213,6 +213,7 @@ class SongLinkService
             'Anghami' => .0035,
             'Napster' => .019,
             'SoundCloud' => .003275,
+            'Audiomack' => .0035,
         ];
 
         return $map[$platform] ?? .0035;
