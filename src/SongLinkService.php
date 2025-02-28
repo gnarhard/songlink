@@ -66,7 +66,7 @@ class SongLinkService
     /**
      * Fetch and store song links in the database.
      */
-    public function storeSongLinks(string $spotifyUrl, string $title, string $slug, bool $isSingle, ?string $album_artwork_path = null, ?string $youtube_video_id = null): ?SongLink
+    public function storeSongLinks(string $spotifyUrl, string $title, string $slug, bool $isSingle = true, ?string $album_artwork_path = null, ?string $youtube_video_id = null): ?SongLink
     {
         $data = $this->fetchSongLinks($spotifyUrl, $isSingle);
 
