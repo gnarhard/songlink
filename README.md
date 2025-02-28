@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/gnarhard/songlink/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/gnarhard/songlink/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/gnarhard/songlink.svg?style=flat-square)](https://packagist.org/packages/gnarhard/songlink)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Allow dynamic songlink generation and display.
 
 ## Support us
 
@@ -40,20 +40,22 @@ This is the contents of the published config file:
 
 ```php
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Odesli API URL
+    |--------------------------------------------------------------------------
+    |
+    | This is the base URL for the Odesli (SongLink) API.
+    |
+    */
+    'api_url' => env('SONGLINK_API_URL', 'https://api.song.link/v1-alpha.1/links'),
 ];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="songlink-views"
 ```
 
 ## Usage
 
-```php
-$songlink = new Gnarhard\SongLink();
-echo $songlink->echoPhrase('Hello, Gnarhard!');
+```bash
+art songlink:store "<spotify_url>" "<title>" <slug> <is_single>
 ```
 
 ## Testing
@@ -76,8 +78,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Grayson Erhard](https://github.com/gnarhard)
-- [All Contributors](../../contributors)
+-   [Grayson Erhard](https://github.com/gnarhard)
+-   [All Contributors](../../contributors)
 
 ## License
 
