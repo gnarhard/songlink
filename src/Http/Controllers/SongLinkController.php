@@ -12,7 +12,7 @@ class SongLinkController
     /**
      * Show the listen page.
      */
-    public function showListenPage(Request $request): View
+    public function show(Request $request): View
     {
         $songSlug = $request->query('s')
             ?? $request->query('song')
