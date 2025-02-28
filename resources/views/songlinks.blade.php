@@ -49,7 +49,7 @@
                 </li>
             </ul>
 
-            <h4 class="text-center mt-4">LATEST VIDEO</h4>
+            <h5 class="text-center mt-4">Latest Video</h5>
             @empty(!$song->youtube_video_id)
                 @include('components.embedded_video', ['videoId' => $song->youtube_video_id])
             @endempty
