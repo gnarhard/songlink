@@ -54,6 +54,10 @@ return [
 
 ## Usage
 
+First, make sure you have a listen.blade.php view file in `resources/views/pages/`.
+
+To generate song links, use the following command:
+
 ```bash
 art songlink:store "<spotify_url>" "<title>" <slug> <is_single>
 ```
