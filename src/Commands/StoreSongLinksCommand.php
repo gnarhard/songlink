@@ -12,7 +12,7 @@ class StoreSongLinksCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'songlink:store {spotifyUrl : The Spotify URL of the song} {title : The title of the song} {slug : A slug of the song to be used when generating URLs} {isSingle=true : Whether the song is a single or not} {albumArtworkPath? : The path to the album artwork} {youtubeVideoId? : The YouTube video ID}';
+    protected $signature = 'songlink:store {spotifyUrl : The Spotify URL of the song} {title : The title of the song} {slug : A slug of the song to be used when generating URLs} {--isSingle : Whether the song is a single or not} {albumArtworkPath? : The path to the album artwork} {youtubeVideoId? : The YouTube video ID}';
 
     /**
      * The console command description.
@@ -27,7 +27,7 @@ class StoreSongLinksCommand extends Command
     public function handle()
     {
         $spotifyUrl = $this->argument('spotifyUrl');
-        $isSingle = $this->argument('isSingle');
+        $isSingle = $this->argument('isSingle') ?? false;
         $title = $this->argument('title');
         $slug = $this->argument('slug');
         $albumArtworkPath = $this->argument('albumArtworkPath');

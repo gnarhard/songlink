@@ -6,13 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SongLink extends Model
 {
-    protected $fillable = [
-        'title',
-        'slug',
-        'is_single',
-        'links',
-        'raw_response',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'links' => 'array',
