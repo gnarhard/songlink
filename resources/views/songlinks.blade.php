@@ -5,8 +5,16 @@
             <h2 class="text-center text-uppercase mb-0">{{ $song->title }}</h2>
             <h4 class="text-center mb-4">{{ $artist ?? '' }}</h4>
             <ul class="list-unstyled mx-auto mt-4 text-center">
-                @foreach ($song->platform_urls as $platform => $url)
+                @foreach ($song->common_platform_urls as $platform => $url)
                     <li class="mb-1">
+                        <a href="{{ $url }}" id="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformClickId($platform) }}" data-conversion-value="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformConversionValue($platform) }}" class="btn-primary btn position-relative listen_link" target="_blank" aria-label="{{ $platform }}" style="min-width: 180px;">
+                            <i class="fa-1x position-absolute {{ Gnarhard\SongLink\Facades\SongLink::getPlatformIcon($platform) }}" style="left: 12px; top: 12px;"></i>
+                            <span class="ms-1 btn-icon-primary__link">{{ $platform }}</span>
+                        </a>
+                    </li>
+                @endforeach
+                @foreach ($song->uncommon_platform_urls as $platform => $url)
+                    <li class="mb-1 d-none">
                         <a href="{{ $url }}" id="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformClickId($platform) }}" data-conversion-value="{{ Gnarhard\SongLink\Facades\SongLink::getPlatformConversionValue($platform) }}" class="btn-primary btn position-relative listen_link" target="_blank" aria-label="{{ $platform }}" style="min-width: 180px;">
                             <i class="fa-1x position-absolute {{ Gnarhard\SongLink\Facades\SongLink::getPlatformIcon($platform) }}" style="left: 12px; top: 12px;"></i>
                             <span class="ms-1 btn-icon-primary__link">{{ $platform }}</span>

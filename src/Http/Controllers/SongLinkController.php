@@ -24,7 +24,8 @@ class SongLinkController
             if ($song == null) {
                 return null;
             }
-            $song->platform_urls = FacadesSongLink::getPlatformUrls($song->links);
+            $song->common_platform_urls = FacadesSongLink::getPlatformUrls($song->links, true);
+            $song->uncommon_platform_urls = FacadesSongLink::getPlatformUrls($song->links, false);
 
             return $song;
         });

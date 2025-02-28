@@ -24,6 +24,27 @@ class SongLinkService
         'Boomplay',
         'Anghami',
         'Napster',
+        'Audiomack',
+    ];
+
+    protected array $shown = [
+        'Spotify',
+        'YouTube Music',
+        'Apple Music',
+        'Amazon',
+    ];
+
+    protected array $hidden = [
+        'Tidal',
+        'Deezer',
+        'SoundCloud',
+        'Pandora',
+        'iTunes',
+        'Bandcamp',
+        'Boomplay',
+        'Anghami',
+        'Napster',
+        'Audiomack',
     ];
 
     /**
@@ -106,7 +127,7 @@ class SongLinkService
      *
      * @param  array  $links  Raw 'linksByPlatform' array
      */
-    public function getPlatformUrls(array $links): array
+    public function getPlatformUrls(array $links, bool $common = true): array
     {
         // Remove unwanted platforms up front
         unset($links['amazonStore'], $links['youtube']);
@@ -124,7 +145,10 @@ class SongLinkService
         }
 
         // Sort by popularity
-        return $this->sortPlatformUrls($platformUrls);
+        $platformUrls = $this->sortPlatformUrls($platformUrls);
+
+        // Optionally filter out uncommon platforms
+        return $common ? array_intersect_key($platformUrls, array_flip($this->shown)) : array_diff_key($platformUrls, array_flip($this->shown));
     }
 
     /**
@@ -147,6 +171,7 @@ class SongLinkService
             'pandora' => 'Pandora',
             'boomplay' => 'Boomplay',
             'napster' => 'Napster',
+            'audiomack' => 'Audiomack',
         ];
 
         return $map[$platform] ?? $platform;
@@ -235,6 +260,7 @@ class SongLinkService
             'Anghami' => 'anghami_stream',
             'Napster' => 'napster_stream',
             'SoundCloud' => 'soundcloud_stream',
+            'Audiomack' => 'audiomack_stream',
             'Share' => 'share_listen_page',
         ];
 
