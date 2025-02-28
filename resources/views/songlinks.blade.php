@@ -49,11 +49,12 @@
                 </li>
             </ul>
 
+            <div class="link_copied bg-success text-center p-1 d-none">LINK COPIED TO CLIPBOARD</div>
+
             <h5 class="text-center mt-4">Latest Video</h5>
             @empty(!$song->youtube_video_id)
                 @include('components.embedded_video', ['videoId' => $song->youtube_video_id])
             @endempty
-            <div class="link_copied bg-success text-center p-3 rounded d-none">LINK COPIED TO CLIPBOARD</div>
         </div>
     </div>
 </div>
