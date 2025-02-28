@@ -1,0 +1,9 @@
+preset: laravel
+
+namespace: Gnarhard\SongLink
+
+model:
+  namespace: Gnarhard\SongLink\Models
+paths:
+  src: src
+  resource: resources
