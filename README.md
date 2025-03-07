@@ -59,7 +59,7 @@ First, make sure you have a listen.blade.php view file in `resources/views/pages
 To generate song links, use the following command:
 
 ```bash
-art songlink:store "<spotify_url>" "<title>" <slug> <is_single>
+php artisan songlink:store "https://open.spotify.com/album/7j98ubzAqFSSev7JDZIzXk?si=Xg5Yf-T-SBq7wjJ-rwuunQ" "Alpenglow" alpenglow images/music/alpenglow_mist.webp EfK5r8NTaNY <--isSingle>
 ```
 
 ## Testing
