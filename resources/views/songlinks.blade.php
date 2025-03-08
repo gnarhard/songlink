@@ -31,7 +31,7 @@
                         </li>
                     @endforeach
                 </div>
-                <a href="#" id="more" class="text-decoration-none">more...</a>
+                <a href="#" id="more">show more &#x25BC;</a>
 
                 @if (route('mailing-list'))
                     <li class="mt-3 mb-1">
@@ -84,10 +84,10 @@
 
             if (uncommonPlatforms.style.maxHeight) {
                 uncommonPlatforms.style.maxHeight = null;
-                moreLink.textContent = "more...";
+                moreLink.textContent = "show more &#x25BC;";
             } else {
                 uncommonPlatforms.style.maxHeight = uncommonPlatforms.scrollHeight + "px";
-                moreLink.textContent = "less...";
+                moreLink.textContent = "show less &#x25B2;";
             }
         });
     </script>
