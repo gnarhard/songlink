@@ -25,6 +25,7 @@ class SongLinkService
         'Anghami',
         'Napster',
         'Audiomack',
+        'Qobuz',
     ];
 
     protected array $shown = [
@@ -45,6 +46,7 @@ class SongLinkService
         'Anghami',
         'Napster',
         'Audiomack',
+        'Qobuz',
     ];
 
     /**
@@ -172,6 +174,7 @@ class SongLinkService
             'boomplay' => 'Boomplay',
             'napster' => 'Napster',
             'audiomack' => 'Audiomack',
+            'qobuz' => 'Qobuz',
         ];
 
         return $map[$platform] ?? $platform;
@@ -239,6 +242,7 @@ class SongLinkService
             'Napster' => .019,
             'SoundCloud' => .003275,
             'Audiomack' => .0035,
+            'Qobuz' => .01,
         ];
 
         return $map[$platform] ?? .0035;
@@ -262,6 +266,7 @@ class SongLinkService
             'SoundCloud' => 'soundcloud_stream',
             'Audiomack' => 'audiomack_stream',
             'Share' => 'share_listen_page',
+            'Qobuz' => 'qobuz_stream',
         ];
 
         return $map[$platform] ?? .0035;

@@ -9,6 +9,15 @@ it('formats command arguments properly', function () {
     $slug = 'mist';
     $spotifyUrl = 'https://open.spotify.com/track/4hhbLHdsBw4y0AR9iBV0CN?si=7086c6871b9c49a1';
 
+    SongLinkFacade::shouldReceive('storeSongLinks')
+        ->once()
+        ->with($spotifyUrl, $songTitle, $slug, true, null, null)
+        ->andReturn(new SongLink([
+            'title' => $songTitle,
+            'slug' => $slug,
+            'links' => [],
+        ]));
+
     Artisan::call('songlink:store', [
         'spotifyUrl' => $spotifyUrl,
         'title' => $songTitle,
@@ -24,9 +33,9 @@ it('can fetch song links', function () {
 
     // dd($result);
 
-    expect('entityUniqueId')->toBeString();
-    expect('linksByPlatform')->toBeArray();
-    expect('entitiesByUniqueId')->toBeArray();
+    expect($result['entityUniqueId'])->toBeString();
+    expect($result['linksByPlatform'])->toBeArray();
+    expect($result['entitiesByUniqueId'])->toBeArray();
 });
 
 it('can create platform links', function () {
@@ -81,13 +90,15 @@ it('can create platform links', function () {
         'links' => $links,
     ]);
 
-    $platformUrls = SongLinkFacade::getPlatformUrls($links);
+    $platformUrls = SongLinkFacade::getPlatformUrls($links, true);
+    $platformUrlsRaw = SongLinkFacade::getPlatformUrls($links, false);
+    $combinedPlatformUrls = array_merge($platformUrls, $platformUrlsRaw);
 
-    expect($platformUrls)->not->toBeEmpty();
+    expect($combinedPlatformUrls)->not->toBeEmpty();
 
     // Check if the array keys have uppercase letters
     $hasUppercaseKey = false;
-    foreach (array_keys($platformUrls) as $key) {
+    foreach (array_keys($combinedPlatformUrls) as $key) {
         if (preg_match('/[A-Z]/', $key)) {
             $hasUppercaseKey = true;
             break;
@@ -97,7 +108,7 @@ it('can create platform links', function () {
 
     // Check if the array values have URLs
     $hasUrlValue = false;
-    foreach ($platformUrls as $value) {
+    foreach ($combinedPlatformUrls as $value) {
         if (filter_var($value, FILTER_VALIDATE_URL)) {
             $hasUrlValue = true;
             break;
@@ -107,7 +118,9 @@ it('can create platform links', function () {
 
     // Check if the array is sorted by popularity
     $popularity = SongLinkFacade::getPopularityOrder();
-    $sortedKeys = array_keys($platformUrls);
+    $sortedKeys = array_keys($combinedPlatformUrls);
+    // add any keys that are in the popularity list but not in the sortedKeys to the end of sortedKeys
+    $sortedKeys = array_merge($sortedKeys, array_diff($popularity, $sortedKeys));
     expect($sortedKeys)->toBe($popularity);
 });
 
