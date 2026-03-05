@@ -143,7 +143,8 @@ class SongLinkService
 
             // Convert internal key to a nicer display name
             $displayName = $this->fixPlatformPunctuation($platformKey);
-            $platformUrls[$displayName] = $details['url'];
+            // Sanitize URL by removing any spaces
+            $platformUrls[$displayName] = str_replace(' ', '', $details['url']);
         }
 
         // Sort by popularity
