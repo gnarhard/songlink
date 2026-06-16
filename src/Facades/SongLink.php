@@ -2,15 +2,16 @@
 
 namespace Gnarhard\SongLink\Facades;
 
+use Gnarhard\SongLink\SongLinkService;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Gnarhard\SongLink\SongLinkService
+ * @see SongLinkService
  */
 class SongLink extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Gnarhard\SongLink\SongLinkService::class;
+        return SongLinkService::class;
     }
 }
