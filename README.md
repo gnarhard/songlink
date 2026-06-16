@@ -59,7 +59,7 @@ First, make sure you have a listen.blade.php view file in `resources/views/pages
 To generate song links, use the following command:
 
 ```bash
-php artisan songlink:store "https://open.spotify.com/album/444XUOHROAcVqeHEB1mYey?si=THwdnR0jQA2s2fynLY7VSw" "Ox Send" ox_send false images/cover_art/ox_send.webp oFoJQkqjgeM
+php artisan songlink:store --spotifyUrl="https://open.spotify.com/album/444XUOHROAcVqeHEB1mYey?si=THwdnR0jQA2s2fynLY7VSw" --title="Ox Send" --slug=ox_send --albumArtworkPath=images/cover_art/ox_send.webp --youtubeVideoId=oFoJQkqjgeM
 ```
 
 ## Testing

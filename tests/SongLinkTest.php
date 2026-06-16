@@ -19,10 +19,10 @@ it('formats command arguments properly', function () {
         ]));
 
     Artisan::call('songlink:store', [
-        'spotifyUrl' => $spotifyUrl,
-        'title' => $songTitle,
-        'slug' => $slug,
-        'isSingle' => true,
+        '--spotifyUrl' => $spotifyUrl,
+        '--title' => $songTitle,
+        '--slug' => $slug,
+        '--isSingle' => true,
     ]);
 });
 
