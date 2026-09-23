@@ -159,3 +159,37 @@ it('can create platform links', function () {
 
 //     expect(SongLink::count())->toBe(1);
 // });
+
+it('renders without a background when the song has no artwork', function () {
+    $html = view('songlink::songlinks', [
+        'song' => songForView(['title' => 'No Art', 'slug' => 'no-art']),
+        'artist' => 'Someone',
+    ])->render();
+
+    expect($html)->toContain('No Art')->not->toContain('background: url(');
+});
+
+it('uses the given background image over the song artwork', function () {
+    $html = view('songlink::songlinks', [
+        'song' => songForView(['title' => 'Art', 'slug' => 'art', 'album_artwork_path' => 'images/art.webp']),
+        'backgroundImage' => 'images/override.webp',
+    ])->render();
+
+    expect($html)->toContain('images/override.webp')->not->toContain('images/art.webp');
+});
+
+/**
+ * A song prepared the way SongLinkController hands it to the view.
+ */
+function songForView(array $attributes): SongLink
+{
+    // The view links to the host app's mailing list page.
+    Illuminate\Support\Facades\Route::get('/mailing-list', fn () => '')->name('mailing-list');
+    app('router')->getRoutes()->refreshNameLookups();
+
+    $song = SongLink::make([...$attributes, 'links' => ['spotify' => ['url' => 'https://open.spotify.com/track/1']]]);
+    $song->common_platform_urls = SongLinkFacade::getPlatformUrls($song->links, true);
+    $song->uncommon_platform_urls = SongLinkFacade::getPlatformUrls($song->links, false);
+
+    return $song;
+}

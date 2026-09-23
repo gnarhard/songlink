@@ -6,7 +6,8 @@
     }
 </style>
 
-<div style="background: url({{ asset($backgroundImage ?? $song->album_artwork_path) }}); background-size: cover; background-position: center;" class="container-fluid">
+@php($background = $backgroundImage ?? $song->album_artwork_path)
+<div @if ($background) style="background: url({{ asset($background) }}); background-size: cover; background-position: center;" @endif class="container-fluid">
     <div class="row" style="background-color: rgba(0,0,0,.7);">
         <div class="col col-md-8 mx-auto py-4">
             <h6 class="text-center mb-1 d-block">LISTEN TO</h6>
