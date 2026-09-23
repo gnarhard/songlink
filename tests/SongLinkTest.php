@@ -2,7 +2,9 @@
 
 use Gnarhard\SongLink\Facades\SongLink as SongLinkFacade;
 use Gnarhard\SongLink\Models\SongLink;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 
 it('formats command arguments properly', function () {
     $songTitle = 'Mist';
@@ -29,13 +31,30 @@ it('formats command arguments properly', function () {
 it('can fetch song links', function () {
     $spotifyUrl = 'https://open.spotify.com/track/4hhbLHdsBw4y0AR9iBV0CN?si=7086c6871b9c49a1';
 
-    $result = SongLinkFacade::fetchSongLinks($spotifyUrl);
+    Http::fake([
+        '*' => Http::response([
+            'entityUniqueId' => 'SPOTIFY_SONG::4hhbLHdsBw4y0AR9iBV0CN',
+            'linksByPlatform' => ['spotify' => ['url' => $spotifyUrl]],
+            'entitiesByUniqueId' => ['SPOTIFY_SONG::4hhbLHdsBw4y0AR9iBV0CN' => ['title' => 'Mist']],
+        ]),
+    ]);
 
-    // dd($result);
+    $result = SongLinkFacade::fetchSongLinks($spotifyUrl, true);
 
     expect($result['entityUniqueId'])->toBeString();
     expect($result['linksByPlatform'])->toBeArray();
     expect($result['entitiesByUniqueId'])->toBeArray();
+
+    Http::assertSent(fn (Request $request) => $request['url'] === $spotifyUrl
+        && str_starts_with($request->url(), config('songlink.api_url')));
+});
+
+it('returns null when the song.link API rejects the request', function () {
+    Http::fake([
+        '*' => Http::response(['statusCode' => 401, 'code' => 'PUBLIC_API_ACCESS_DEPRECATED'], 401),
+    ]);
+
+    expect(SongLinkFacade::fetchSongLinks('https://open.spotify.com/track/abc'))->toBeNull();
 });
 
 it('can create platform links', function () {
