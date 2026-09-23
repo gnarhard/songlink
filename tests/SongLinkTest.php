@@ -5,6 +5,7 @@ use Gnarhard\SongLink\Models\SongLink;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 
 it('formats command arguments properly', function () {
     $songTitle = 'Mist';
@@ -184,7 +185,7 @@ it('uses the given background image over the song artwork', function () {
 function songForView(array $attributes): SongLink
 {
     // The view links to the host app's mailing list page.
-    Illuminate\Support\Facades\Route::get('/mailing-list', fn () => '')->name('mailing-list');
+    Route::get('/mailing-list', fn () => '')->name('mailing-list');
     app('router')->getRoutes()->refreshNameLookups();
 
     $song = SongLink::make([...$attributes, 'links' => ['spotify' => ['url' => 'https://open.spotify.com/track/1']]]);
