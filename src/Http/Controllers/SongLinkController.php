@@ -31,7 +31,7 @@ class SongLinkController
         });
 
         if ($song == null) {
-            return view('errors.404');
+            abort(404);
         }
 
         return view('pages.listen', ['song' => $song]);

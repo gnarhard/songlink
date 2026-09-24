@@ -6,6 +6,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 it('formats command arguments properly', function () {
     $songTitle = 'Mist';
@@ -177,6 +178,21 @@ it('uses the given background image over the song artwork', function () {
     ])->render();
 
     expect($html)->toContain('images/override.webp')->not->toContain('images/art.webp');
+});
+
+it('shows the requested song on the listen page', function () {
+    View::addLocation(__DIR__.'/fixtures/views');
+    SongLink::create(['title' => 'Mist', 'slug' => 'mist', 'links' => []]);
+
+    $this->get(route('listen', ['s' => 'mist']))
+        ->assertOk()
+        ->assertViewHas('song', fn (SongLink $song) => $song->slug === 'mist');
+});
+
+it('responds with a 404 for an unknown song', function () {
+    SongLink::create(['title' => 'Mist', 'slug' => 'mist', 'links' => []]);
+
+    $this->get(route('listen', ['s' => 'missing']))->assertNotFound();
 });
 
 /**

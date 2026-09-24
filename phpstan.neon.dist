@@ -13,8 +13,8 @@ parameters:
     configDirectories:
         - config
     ignoreErrors:
-        # errors.404 and pages.listen are views of the host application, invisible to the package.
+        # pages.listen is a view of the host application, invisible to the package.
         -
             identifier: argument.type
             path: src/Http/Controllers/SongLinkController.php
-            count: 2
+            count: 1
